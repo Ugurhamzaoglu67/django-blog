@@ -2,12 +2,15 @@ from django.db import models
 from autoslug import AutoSlugField
 from blog.models import KategoriModel
 from django.contrib.auth.models import User #ForeignKey 'i User'e bağlamak için.
+from ckeditor.fields import RichTextField
+
+
 
 
 class YazilarModel(models.Model):
       resim = models.ImageField(upload_to = 'yazi_resimleri')
       baslik = models.CharField(max_length=50)
-      icerik = models.TextField()
+      icerik = RichTextField()
       olusturulma_tarihi = models.DateTimeField(auto_now_add = True) # Oto oluşturulan Tarihi vericek
       duzenleme_tarihi = models.DateTimeField(auto_now=True)          #Yazilar tablosunda bu içerik, her değiştirildiğinde  oto olarak düzenlendiği tarih için
       slug = AutoSlugField(populate_from ='baslik', unique= True) #Başlığa göre slug
@@ -21,7 +24,10 @@ class YazilarModel(models.Model):
       class Meta:
             verbose_name = 'Yazi'
             verbose_name_plural = 'Yazilar'
-            db_name = 'Yazi'
+            db_table = 'Yazi'
 
 
 #______________ YAZILAR MODELİ OLUSTURULDU -> makemigrations, migrate yap...
+
+      def __str__(self):
+            return self.baslik
