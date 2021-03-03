@@ -1,9 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User #ForeignKey ve yazan ile ilişkinlendirme..
 from blog.models import YazilarModel
 
 class YorumModel(models.Model):
-      yazan_kisi = models.ForeignKey(User, on_delete = models.CASCADE, related_name='yorum')#yazan kisinin yorumuna erişim:related_name='yorum' # Eğerki Kullanıcı silinirse, bu kullanıcının'da yorumları silinsin, models.CASCADE
+      yazan_kisi = models.ForeignKey('account.CustomUserModel', on_delete = models.CASCADE, related_name='yorum')#yazan kisinin yorumuna erişim:related_name='yorum' # Eğerki Kullanıcı silinirse, bu kullanıcının'da yorumları silinsin, models.CASCADE
       yazilan_icerik= models.ForeignKey(YazilarModel, on_delete = models.CASCADE, related_name='yorumlar')#her yorum bir yazıya atılacak, her atılan yorumu bir yazıyla eşleştirecez bunun içinde YazilarModel'ini sayfaya dahil edecez.#birde her yorumu, yazı ilişkilendirme
             #yazilan_iceriğin yorumlarına erişmek için : related_name='yorumlar'
       yapilan_yorum = models.TextField()
