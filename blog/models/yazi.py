@@ -2,16 +2,15 @@ from django.db import models
 from autoslug import AutoSlugField
 from blog.models import KategoriModel
 from ckeditor.fields import RichTextField
+from blog.abstract_models import DateAbstractModel
 
 
 
-
-class YazilarModel(models.Model):
+class YazilarModel(DateAbstractModel): #Temelde MODEL içinde eklediklerimizde var
       resim = models.ImageField(upload_to = 'yazi_resimleri')
       baslik = models.CharField(max_length=50)
       icerik = RichTextField()
-      olusturulma_tarihi = models.DateTimeField(auto_now_add = True) # Oto oluşturulan Tarihi vericek
-      duzenleme_tarihi = models.DateTimeField(auto_now=True)          #Yazilar tablosunda bu içerik, her değiştirildiğinde  oto olarak düzenlendiği tarih için
+
       slug = AutoSlugField(populate_from ='baslik', unique= True) #Başlığa göre slug
       kategoriler = models.ManyToManyField(KategoriModel, related_name='yazi') #Bir yazının, kategori sayısı => 1   olması için ManyToMany.
       # 1 kategoriye ait, bütün yazılara  erişmek için  related_name kullanıyoruz   

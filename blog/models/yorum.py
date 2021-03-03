@@ -1,14 +1,12 @@
 from django.db import models
 from blog.models import YazilarModel
+from blog.abstract_models import DateAbstractModel
 
-class YorumModel(models.Model):
+class YorumModel(DateAbstractModel):
       yazan_kisi = models.ForeignKey('account.CustomUserModel', on_delete = models.CASCADE, related_name='yorum')#yazan kisinin yorumuna erişim:related_name='yorum' # Eğerki Kullanıcı silinirse, bu kullanıcının'da yorumları silinsin, models.CASCADE
       yazilan_icerik= models.ForeignKey(YazilarModel, on_delete = models.CASCADE, related_name='yorumlar')#her yorum bir yazıya atılacak, her atılan yorumu bir yazıyla eşleştirecez bunun içinde YazilarModel'ini sayfaya dahil edecez.#birde her yorumu, yazı ilişkilendirme
             #yazilan_iceriğin yorumlarına erişmek için : related_name='yorumlar'
       yapilan_yorum = models.TextField()
-      yorum_olusturulma_tarihi = models.DateTimeField(auto_now_add = True )
-      yorum_duzenlenme_tarihi = models.DateTimeField(auto_now = True )
-
       class Meta:
             db_table = 'yorum' 
             verbose_name = 'Yorum'

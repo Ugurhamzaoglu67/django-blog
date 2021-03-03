@@ -1,12 +1,13 @@
 from django.db import models
+from blog.abstract_models import DateAbstractModel
 
 
 
-class IletisimModel(models.Model):
+
+class IletisimModel(DateAbstractModel):
       email = models.EmailField(max_length = 250) #NEDEN EmailField()   ? ->**Auto Olarak Email Validation Yapılıyor Django tarafından...
       isim_soyisim = models.CharField(max_length= 150)
       mesaj = models.TextField()
-      iletisim_olusturulma_tarihi = models.DateTimeField(auto_now_add = True) # Otomatik olarak bize gönderi geldiğinde,  oluşturulma tarihide kayıtolsun ve ne zaman gönderdiklerini tutalım..
 
 
       class Meta:
