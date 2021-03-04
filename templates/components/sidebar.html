@@ -1,29 +1,35 @@
     
 <!-- Sağ -->
 <div class="col-sm-3">
+     
       <div class="card mb-3" >
             <div class="card-header">
                   Menü
             </div>
-            <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                        Profil düzenle
-                  </li>
-                  <li class="list-group-item">
-                        Şifre değiştir
-                  </li>
-                  <li class="list-group-item">
-                        Yazı Ekle
-                  </li>
-
-                  <li class="list-group-item">
-                  Yazılarım
+      {% if request.user.is_authenticated %}   
+      <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                  Profil düzenle
             </li>
             <li class="list-group-item">
-                  Çıkış yap
+                  Şifre değiştir
+            </li>
+            <li class="list-group-item">
+                  Yazı Ekle
             </li>
 
-                  
-            </ul>
+            <li class="list-group-item">
+                  <a href="{% url 'yazilarim' %}">Yazılarım</a>
+            </li>
+             <li class="list-group-item">
+            Çıkış yap
+            </li>
+         
+      </ul>
+
+      {%else%}
+            <h1>Login formu gelecek..</h1>
+      {% endif %}
+
       </div>
 </div>
