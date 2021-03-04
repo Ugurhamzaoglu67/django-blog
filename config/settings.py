@@ -126,3 +126,5 @@ MEDIA_URL ='/media/' # Bu bize media/ 'dan sonra gelenleri temsil eder.
 MEDIA_ROOT =os.path.join(BASE_DIR,"media/") #Bu ise dosyaların bulunduğu yeri belirtecek.
 # import os unutma........
 #NOT: manage.py ->olan yola BASE_DIR denir.
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
