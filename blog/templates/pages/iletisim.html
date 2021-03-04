@@ -4,10 +4,12 @@
 İletişim 
 {% endblock %}
 
-
-
 {% block content %}
 
-iletişim
+      <form method="POST">
+            {% csrf_token%}
+            {{form.as_p}}
+            <input type="submit" value="Gönder" />
+      </form>
     
 {% endblock %}
